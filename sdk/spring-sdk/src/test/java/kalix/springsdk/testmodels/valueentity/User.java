@@ -16,17 +16,19 @@
 
 package kalix.springsdk.testmodels.valueentity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class User {
 
   public final String firstName;
   public final String lastName;
+  public final String email;
 
-  public User(String firstName, String lastName) {
+  @JsonCreator
+  public User(String firstName, String lastName, String email) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.email =  email;
   }
 
-  public static User empty() {
-    return new User("", "");
-  }
 }

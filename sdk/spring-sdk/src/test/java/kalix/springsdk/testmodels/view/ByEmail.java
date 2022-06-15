@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package kalix.springsdk.annotations;
+package kalix.springsdk.testmodels.view;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public @interface Subscribe {
+public class ByEmail {
 
-  @Target({ElementType.METHOD, ElementType.TYPE})
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface ValueEntity {
-    String entityType();
+  final public String email;
+
+  @JsonCreator
+  public ByEmail(@JsonProperty String email) {
+    this.email = email;
   }
 }
