@@ -17,11 +17,11 @@
 package kalix.springsdk.impl.action
 
 import com.google.protobuf.{ Any => JavaPbAny }
-import kalix.springsdk.impl.IntrospectionSuite
+import kalix.springsdk.impl.ComponentDescriptorSuite
 import kalix.springsdk.testmodels.subscriptions.SubscriptionsTestModels.SubscribeToValueEntityAction
 import org.scalatest.wordspec.AnyWordSpec
 
-class ActionSubscriptionIntrospectorSpec extends AnyWordSpec with IntrospectionSuite {
+class ActionSubscriptionComponentDescriptorSpec extends AnyWordSpec with ComponentDescriptorSuite {
 
   "generate mapping with value entity subscription annotations" in {
     assertDescriptor[SubscribeToValueEntityAction] { desc =>
@@ -29,12 +29,12 @@ class ActionSubscriptionIntrospectorSpec extends AnyWordSpec with IntrospectionS
       val methodOne = desc.methods("MessageOne")
       methodOne.messageDescriptor.getFullName shouldBe JavaPbAny.getDescriptor.getFullName
 
-      val eventSourceOne = findSubscription(desc, "MessageOne")
+      val eventSourceOne = findKalixMethodOptions(desc, "MessageOne").getEventing.getIn
       eventSourceOne.getValueEntity shouldBe "ve-counter"
 
       val methodTwo = desc.methods("MessageTwo")
       methodTwo.messageDescriptor.getFullName shouldBe JavaPbAny.getDescriptor.getFullName
-      val eventSourceTwo = findSubscription(desc, "MessageTwo")
+      val eventSourceTwo = findKalixMethodOptions(desc, "MessageTwo").getEventing.getIn
       eventSourceTwo.getValueEntity shouldBe "ve-counter"
     }
   }

@@ -17,11 +17,11 @@
 package kalix.springsdk.impl.valueentity
 
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType
-import kalix.springsdk.impl.IntrospectionSuite
+import kalix.springsdk.impl.ComponentDescriptorSuite
 import kalix.springsdk.testmodels.valueentity.ValueEntitiesTestModels.PostWithEntityKeys
 import org.scalatest.wordspec.AnyWordSpec
 
-class ValueEntityIntrospectorSpec extends AnyWordSpec with IntrospectionSuite {
+class ValueEntityComponentDescriptorSpec extends AnyWordSpec with ComponentDescriptorSuite {
 
   "ValueEntity introspector" should {
     "generate mappings for a Value Entity with entity keys in path" in {
@@ -36,7 +36,6 @@ class ValueEntityIntrospectorSpec extends AnyWordSpec with IntrospectionSuite {
         assertEntityKeyField(method, "cartId")
       }
     }
-
   }
 
 }

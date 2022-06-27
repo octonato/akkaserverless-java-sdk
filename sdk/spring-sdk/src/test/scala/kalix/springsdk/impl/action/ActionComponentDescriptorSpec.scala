@@ -17,7 +17,7 @@
 package kalix.springsdk.impl.action
 
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType
-import kalix.springsdk.impl.IntrospectionSuite
+import kalix.springsdk.impl.ComponentDescriptorSuite
 import kalix.springsdk.testmodels.action.ActionsTestModels.DeleteWithOneParam
 import kalix.springsdk.testmodels.action.ActionsTestModels.GetClassLevel
 import kalix.springsdk.testmodels.action.ActionsTestModels.GetWithOneParam
@@ -32,7 +32,7 @@ import kalix.springsdk.testmodels.action.ActionsTestModels.PutWithOneParam
 import kalix.springsdk.testmodels.action.ActionsTestModels.PutWithoutParam
 import org.scalatest.wordspec.AnyWordSpec
 
-class ActionIntrospectorSpec extends AnyWordSpec with IntrospectionSuite {
+class ActionComponentDescriptorSpec extends AnyWordSpec with ComponentDescriptorSuite {
 
   "Action introspector" should {
 

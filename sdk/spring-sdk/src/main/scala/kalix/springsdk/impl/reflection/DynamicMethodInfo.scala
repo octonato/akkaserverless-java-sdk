@@ -49,22 +49,7 @@ case class DynamicMethodInfo(
 
 object DynamicMethodInfo {
 
-  def build(
-      restMethod: RestMethod,
-      generator: NameGenerator,
-      entityKeys: Seq[String] = Seq.empty): DynamicMethodInfo = {
-
-    // TODO: check for EventSourced, Replicated and Topics
-    val hasSubscriptionAnnotations =
-      restMethod.javaMethod.getAnnotation(classOf[Subscribe.ValueEntity]) != null
-
-    if (hasSubscriptionAnnotations)
-      buildForProtoAny(restMethod, generator)
-    else
-      buildSyntheticMessageDescriptor(restMethod, generator, entityKeys)
-  }
-
-  private def buildForProtoAny(restMethod: RestMethod, generator: NameGenerator): DynamicMethodInfo = {
+  def buildSubscriptionMethod(restMethod: RestMethod, generator: NameGenerator): DynamicMethodInfo = {
 
     val methodName = restMethod.javaMethod.getName.capitalize
     val inputTypeName = JavaPbAny.getDescriptor.getFullName
@@ -97,7 +82,7 @@ object DynamicMethodInfo {
 
     val anyBodyExtractor = new ExtractorCreator {
       override def apply(descriptor: Descriptors.Descriptor): ParameterExtractor[DynamicMessageContext, AnyRef] =
-        // FIXME: new to find type properly
+        // FIXME: need to find type properly
         new ParameterExtractors.AnyBodyExtractor(typeParam)
 
     }
@@ -108,10 +93,10 @@ object DynamicMethodInfo {
   /*
    * Build a DynamicMethodInfo for method using a synthetic message
    */
-  private def buildSyntheticMessageDescriptor(
+  def buildSyntheticMessageDescriptor(
       restMethod: RestMethod,
       generator: NameGenerator,
-      entityKeys: Seq[String]): DynamicMethodInfo = {
+      entityKeys: Seq[String] = Seq.empty): DynamicMethodInfo = {
 
     val methodName = restMethod.javaMethod.getName.capitalize
     val httpRule: HttpRule.Builder = buildHttpRule(restMethod)

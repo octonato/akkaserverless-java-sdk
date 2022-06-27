@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package kalix.springsdk.testmodels.valueentity;
+package kalix.springsdk.testmodels.view;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-  public final String firstName;
-  public final String lastName;
-  public final String email;
+public class ByEmail {
 
-  public User(String firstName, String lastName, String email) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  final public String email;
+
+  @JsonCreator
+  public ByEmail(String email) {
     this.email = email;
   }
-
 }

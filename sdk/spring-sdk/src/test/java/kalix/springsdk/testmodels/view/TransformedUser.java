@@ -14,18 +14,14 @@
  * limitations under the License.
  */
 
-package kalix.springsdk.testmodels.valueentity;
+package kalix.springsdk.testmodels.view;
 
-public class User {
-
-  public final String firstName;
-  public final String lastName;
+public class TransformedUser {
+  public final String name;
   public final String email;
 
-  public User(String firstName, String lastName, String email) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  public TransformedUser(String name, String email) {
+    this.name = name;
     this.email = email;
   }
-
 }

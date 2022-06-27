@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package kalix.springsdk.testmodels.valueentity;
+package kalix.springsdk.annotations;
 
-public class User {
+import java.lang.annotation.*;
 
-  public final String firstName;
-  public final String lastName;
-  public final String email;
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Table {
 
-  public User(String firstName, String lastName, String email) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-  }
+  String value();
 
 }
